@@ -43,7 +43,7 @@ BEGIN
 SET @FoundDateMax= CONVERT(date,  DATEADD( day, @i, @date ));  
 SET @FoundDateMin= CONVERT(date,  DATEADD( day, @i* -1, @date ));  
 
- IF NOT EXISTS(SELECT * FROM dbo.AccessDatesLog WHERE  CONVERT(date, AccessDate)=@FoundDateMax)
+ IF NOT EXISTS(SELECT * FROM dbo.AccessDatesLog WHERE  CONVERT(date, AccessDate)=@FoundDateMax ) AND  @FoundDateMax < CONVERT(date,  DATEADD( day, 1, GETDATE() ))
  BEGIN
   set @notfound=0;
  END
